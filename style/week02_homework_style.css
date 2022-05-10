@@ -6,8 +6,7 @@ button {
   margin: 0 auto;
 }
 .card {
-  margin: 10% 5%;
-  position: static;
+  margin: 1% 5%;
 }
 .current-location {
   margin: 0 auto;
@@ -19,6 +18,10 @@ button {
 .current-city,
 .current-temperature {
   font-size: 40px;
+}
+.footer {
+  display: table;
+  margin: 0 auto;
 }
 
 #celsiusUnit,
