@@ -1,0 +1,29 @@
+a {
+  text-decoration: none;
+}
+button {
+  border-color: aliceblue;
+  margin: 0 auto;
+}
+.card {
+  margin: 10% 5%;
+  position: static;
+}
+.current-location {
+  margin: 0 auto;
+  background-color: antiquewhite;
+
+  border-radius: 50px;
+}
+
+.current-city,
+.current-temperature {
+  font-size: 40px;
+}
+
+#celsiusUnit,
+#fahrenheitUnit,
+#unitSeperator {
+  font-size: 20px;
+  vertical-align: top;
+}
