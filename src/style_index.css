@@ -5,9 +5,12 @@ button {
   border-color: aliceblue;
   margin: 0 auto;
 }
+
 .card {
-  margin: 1% 5%;
+  margin: 30px auto;
+  max-width: 1000px;
 }
+
 .current-location {
   margin: 0 auto;
   background-color: antiquewhite;
