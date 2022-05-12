@@ -22,9 +22,13 @@ button {
 .current-temperature {
   font-size: 40px;
 }
+
 .footer {
   display: table;
   margin: 0 auto;
+}
+#description {
+  text-transform: capitalize;
 }
 
 #celsiusUnit,

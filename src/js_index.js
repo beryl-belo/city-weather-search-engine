@@ -42,15 +42,7 @@
 // }
 
 // display current date/time
-let dayList = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Satursday",
-];
+let dayList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 let monthList = [
   "null",
   "Jan",
@@ -118,6 +110,45 @@ function getSearchCityName(event) {
   axios.get(apiUrl).then(showCityTempC);
 }
 
+function formatDate(dateTime) {
+  let raw = new Date(dateTime);
+
+  let date = raw.getDate();
+  if (date < 10) {
+    date = `0${date}`;
+  }
+  let month = raw.getMonth();
+  let year = raw.getFullYear();
+  let hour = raw.getHours();
+
+  if (hour < 10) {
+    hour = `0${hour}`;
+  }
+
+  let minute = raw.getMinutes();
+  if (minute < 10) {
+    minute = `0${minute}`;
+  }
+  let weekday = raw.getDay();
+  let dayList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let monthList = [
+    "null",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  return `${date} ${monthList[month]} ${year} (${dayList[weekday]}) ${hour}:${minute}`;
+}
+
 function showCityTempC(response) {
   let currentCity = document.querySelector("#current-city");
   let responseCityName = response.data.name;
@@ -140,6 +171,11 @@ function showCityTempC(response) {
   let currentDescription = document.querySelector("#description");
   let responseDescription = response.data.weather[0].description;
   currentDescription.innerHTML = responseDescription;
+
+  // // show current city datetime
+  let currentDateTime = document.querySelector("#currentDateTime");
+  console.log(response);
+  currentDateTime.innerHTML = formatDate(response.data.dt * 1000);
 }
 
 let citySearch = document.querySelector("form");
