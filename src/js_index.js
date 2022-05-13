@@ -149,12 +149,6 @@ function formatDate(dateTime) {
   return `${date} ${monthList[month]} ${year} (${dayList[weekday]}) ${hour}:${minute}`;
 }
 
-function getIcon(code) {
-  let iconCode = code;
-  let apiUrl = `http://openweathermap.org/img/wn/${code}@2x.png`;
-  return apiUrl;
-}
-
 function showCityTempC(response) {
   let currentCity = document.querySelector("#current-city");
   let responseCityName = response.data.name;
@@ -178,13 +172,15 @@ function showCityTempC(response) {
   let responseDescription = response.data.weather[0].description;
   currentDescription.innerHTML = responseDescription;
 
-  let currentIcon = document.getElementById("current-city-weather-icon");
+  let currentIcon = document.querySelector("#current-city-weather-icon");
   let responseIcon = response.data.weather[0].icon;
-  currentIcon.src = getIcon(responseIcon);
+  currentIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${responseIcon}@2x.png`
+  );
 
   // // show current city datetime
   let currentDateTime = document.querySelector("#currentDateTime");
-  console.log(response);
   currentDateTime.innerHTML = formatDate(response.data.dt * 1000);
 }
 
