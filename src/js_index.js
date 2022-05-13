@@ -41,42 +41,42 @@
 //   );
 // }
 
-// display current date/time
-let dayList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-let monthList = [
-  "null",
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-// display current date/time/day
-let currentDT = new Date();
-let currentDate = currentDT.getDate();
-if (currentDate < 10) {
-  currentDate = `0${currentDate}`;
-}
-let currentMonth = currentDT.getMonth();
-let currentYear = currentDT.getFullYear();
-let currentDay = currentDT.getDay();
-let currentHour = currentDT.getHours();
-if (currentHour < 10) {
-  currentHour = `0${currentHour}`;
-}
-let currentMin = currentDT.getMinutes();
-if (currentMin < 10) {
-  currentMin = `0${currentMin}`;
-}
-let currentDateTime = document.querySelector("#currentDateTime");
-currentDateTime.innerHTML = `${currentDate} ${monthList[currentMonth]} ${currentYear} ${dayList[currentDay]} ${currentHour}:${currentMin}`;
+// // display current date/time
+// let dayList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+// let monthList = [
+//   "null",
+//   "Jan",
+//   "Feb",
+//   "Mar",
+//   "Apr",
+//   "May",
+//   "Jun",
+//   "Jul",
+//   "Aug",
+//   "Sep",
+//   "Oct",
+//   "Nov",
+//   "Dec",
+// ];
+// // display current date/time/day
+// let currentDT = new Date();
+// let currentDate = currentDT.getDate();
+// if (currentDate < 10) {
+//   currentDate = `0${currentDate}`;
+// }
+// let currentMonth = currentDT.getMonth();
+// let currentYear = currentDT.getFullYear();
+// let currentDay = currentDT.getDay();
+// let currentHour = currentDT.getHours();
+// if (currentHour < 10) {
+//   currentHour = `0${currentHour}`;
+// }
+// let currentMin = currentDT.getMinutes();
+// if (currentMin < 10) {
+//   currentMin = `0${currentMin}`;
+// }
+// let currentDateTime = document.querySelector("#currentDateTime");
+// currentDateTime.innerHTML = `${currentDate} ${monthList[currentMonth]} ${currentYear} ${dayList[currentDay]} ${currentHour}:${currentMin}`;
 
 // update city name
 // function cityResult(event) {
@@ -90,6 +90,7 @@ currentDateTime.innerHTML = `${currentDate} ${monthList[currentMonth]} ${current
 onLoadSearch("Bangkok");
 
 function onLoadSearch(event) {
+  document.querySelector("input").value = event;
   let searchCity = event;
   let unit = "metric";
   let apiKey = "481cea56c4f2263ad817a4c796f0dc58";
@@ -154,11 +155,11 @@ function showCityTempC(response) {
   let responseCityName = response.data.name;
 
   currentCity.innerHTML = responseCityName;
+  document.querySelector("input").value = responseCityName;
 
   let currentTemp = document.querySelector("#currentTempValue");
-  let responseTemp = response.data.main.temp;
-  responseTemp = Math.round(responseTemp);
-  currentTemp.innerHTML = responseTemp;
+  celsiusTempRaw = Math.round(response.data.main.temp);
+  currentTemp.innerHTML = celsiusTempRaw;
 
   let currentHumidity = document.querySelector("#humidity");
   let responseHumidity = response.data.main.humidity;
@@ -211,15 +212,17 @@ currentLocation.addEventListener("click", checkCurrentLocation);
 
 // temperature conversion (0°C × 9/5) + 32 = 32°F
 
-// function fahrenheitConversion(event) {
-//   event.preventDefault();
-//   let currentTemp = document.querySelector("#currentTempValue");
-//   currentTemp.innerHTML = 33; // reset value to celsius
-//   let temp = currentTemp;
-//   currentTemp.innerHTML = Math.round((temp.textContent * 9) / 5 + 32);
-// }
-// let fahrenheitTemp = document.querySelector("#fahrenheitUnit");
-// fahrenheitTemp.addEventListener("click", fahrenheitConversion);
+function fahrenheitConversion(event) {
+  event.preventDefault();
+  let currentTemp = document.querySelector("#currentTempValue");
+  // currentTemp.innerHTML = 33; // reset value to celsius
+
+  currentTemp.innerHTML = Math.round((celsiusTempRaw * 9) / 5 + 32);
+  document.getElementById("fahrenheitUnit").innerHTML = "°F";
+}
+
+let fahrenheitTemp = document.querySelector("#fahrenheitUnit");
+fahrenheitTemp.addEventListener("click", fahrenheitConversion);
 
 // function celsiusConversion(event) {
 //   event.preventDefault();
@@ -227,6 +230,7 @@ currentLocation.addEventListener("click", checkCurrentLocation);
 //   currentTemp.innerHTML = 33; // reset value to celsius
 // }
 let celsiusTemp = document.querySelector("#celsiusUnit");
+let celsiusTempRaw = null;
 celsiusTemp.addEventListener("click", getSearchCityName);
 
 // show city image
