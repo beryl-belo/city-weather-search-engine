@@ -149,6 +149,12 @@ function formatDate(dateTime) {
   return `${date} ${monthList[month]} ${year} (${dayList[weekday]}) ${hour}:${minute}`;
 }
 
+function getIcon(code) {
+  let iconCode = code;
+  let apiUrl = `http://openweathermap.org/img/wn/${code}@2x.png`;
+  return apiUrl;
+}
+
 function showCityTempC(response) {
   let currentCity = document.querySelector("#current-city");
   let responseCityName = response.data.name;
@@ -171,6 +177,10 @@ function showCityTempC(response) {
   let currentDescription = document.querySelector("#description");
   let responseDescription = response.data.weather[0].description;
   currentDescription.innerHTML = responseDescription;
+
+  let currentIcon = document.getElementById("current-city-weather-icon");
+  let responseIcon = response.data.weather[0].icon;
+  currentIcon.src = getIcon(responseIcon);
 
   // // show current city datetime
   let currentDateTime = document.querySelector("#currentDateTime");
