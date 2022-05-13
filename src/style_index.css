@@ -2,21 +2,19 @@ a {
   text-decoration: none;
 }
 button {
-  border-color: aliceblue;
-  margin: 0 auto;
+  font-size: 5px;
 }
-
 .card {
   margin: 30px auto;
   max-width: 1000px;
 }
 
-.current-location {
+/* .current-location {
   margin: 0 auto;
   background-color: antiquewhite;
 
   border-radius: 50px;
-}
+} */
 
 .current-city,
 .current-temperature {

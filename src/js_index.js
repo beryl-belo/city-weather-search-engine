@@ -204,7 +204,9 @@ function checkCurrentLocation() {
   navigator.geolocation.getCurrentPosition(showCurrentPosition);
 }
 
-let currentLocation = document.querySelector(".current-location");
+let currentLocation = document.querySelector(
+  ".btn.btn-secondary.current-location"
+);
 currentLocation.addEventListener("click", checkCurrentLocation);
 
 // temperature conversion (0°C × 9/5) + 32 = 32°F
