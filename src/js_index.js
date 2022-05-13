@@ -178,6 +178,7 @@ function showCityTempC(response) {
     "src",
     `http://openweathermap.org/img/wn/${responseIcon}@2x.png`
   );
+  currentIcon.setAttribute("alt", responseDescription);
 
   // // show current city datetime
   let currentDateTime = document.querySelector("#currentDateTime");
