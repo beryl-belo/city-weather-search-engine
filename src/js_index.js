@@ -150,12 +150,23 @@ function formatDate(dateTime) {
   return `${date} ${monthList[month]} ${year} (${dayList[weekday]}) ${hour}:${minute}`;
 }
 
+function showCityImage(image) {
+  let randomInt = Math.floor(Math.random() * 50 + 1);
+  let imageRaw = image.data.hits[randomInt].largeImageURL;
+  document.getElementById("cityImage").src = imageRaw;
+}
+
 function showCityTempC(response) {
   let currentCity = document.querySelector("#current-city");
   let responseCityName = response.data.name;
-
   currentCity.innerHTML = responseCityName;
   document.querySelector("input").value = responseCityName;
+  document.getElementById("cityImage").alt = responseCityName;
+  // show city image
+  let apiPhotoKey = "27435421-2a1832c30c90f292779ee6779";
+  let apiPhotoCity = responseCityName;
+  let apiPhotoUrl = `https://pixabay.com/api/?key=${apiPhotoKey}&q=${apiPhotoCity}&image_type=photo&category=places&per_page=50&order=popular&pretty=true&orientation=horizontal`;
+  axios.get(apiPhotoUrl).then(showCityImage);
 
   let currentTemp = document.querySelector("#currentTempValue");
   celsiusTempRaw = Math.round(response.data.main.temp);
@@ -238,7 +249,3 @@ fahrenheitTemp.addEventListener("click", fahrenheitConversion);
 let celsiusTemp = document.querySelector("#celsiusUnit");
 let celsiusTempRaw = null;
 celsiusTemp.addEventListener("click", getSearchCityName);
-
-// show city image
-let apiKey = "AIzaSyCtgeyv1lr7ZlMC6rT2RXnVaMoKN22XoDU";
-let apiUrl = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=bangkok, IL&key=${apiKey}&inputtype=textquery&fields=name,photos`;
