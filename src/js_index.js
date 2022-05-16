@@ -160,6 +160,9 @@ function showCityTempC(response) {
   let currentTemp = document.querySelector("#currentTempValue");
   celsiusTempRaw = Math.round(response.data.main.temp);
   currentTemp.innerHTML = celsiusTempRaw;
+  // to disable #fahrenheitUnit conversion css
+  fahrenheitTemp.classList.remove("active");
+  celsiusTemp.classList.add("active");
 
   let currentHumidity = document.querySelector("#humidity");
   let responseHumidity = response.data.main.humidity;
@@ -215,6 +218,9 @@ currentLocation.addEventListener("click", checkCurrentLocation);
 function fahrenheitConversion(event) {
   event.preventDefault();
   let currentTemp = document.querySelector("#currentTempValue");
+  // to disable #celsiusUnit conversion link
+  celsiusTemp.classList.remove("active");
+  fahrenheitTemp.classList.add("active");
   // currentTemp.innerHTML = 33; // reset value to celsius
 
   currentTemp.innerHTML = Math.round((celsiusTempRaw * 9) / 5 + 32);
