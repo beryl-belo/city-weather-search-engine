@@ -151,7 +151,7 @@ function formatDate(dateTime) {
 }
 
 function showCityImage(image) {
-  let randomInt = Math.floor(Math.random() * 10 + 1);
+  let randomInt = Math.floor(Math.random() * 5 + 1);
   let imageRaw = image.data.hits[randomInt].largeImageURL;
   document.getElementById("cityImage").src = imageRaw;
 }
@@ -165,7 +165,7 @@ function showCityTempC(response) {
   // show city image
   let apiPhotoKey = "27435421-2a1832c30c90f292779ee6779";
   let apiPhotoCity = responseCityName;
-  let apiPhotoUrl = `https://pixabay.com/api/?key=${apiPhotoKey}&q=${apiPhotoCity}&image_type=photo&category=places&per_page=10&order=popular&pretty=true&orientation=horizontal`;
+  let apiPhotoUrl = `https://pixabay.com/api/?key=${apiPhotoKey}&q=${apiPhotoCity}&image_type=photo&category=places+travel+food&per_page=5&order=popular&pretty=true&orientation=horizontal`;
   axios.get(apiPhotoUrl).then(showCityImage);
 
   let currentTemp = document.querySelector("#currentTempValue");

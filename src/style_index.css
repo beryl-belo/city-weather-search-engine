@@ -2,6 +2,10 @@ a {
   text-decoration: none;
 }
 
+div {
+  font-size: 15px;
+}
+
 .card {
   margin: 30px auto;
   max-width: 1000px;
@@ -26,12 +30,29 @@ a {
 
 .current-city,
 .current-temperature {
-  font-size: 40px;
+  font-size: 30px;
+}
+
+.weather-forecast {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.weather-forecast-date {
+  font-size: 16px;
+}
+
+.weather-forecast-temperature-min {
+  opacity: 0.5;
 }
 
 .footer {
   display: table;
   margin: 0 auto;
+}
+
+#current-city-weather-icon {
+  max-width: 30%;
 }
 #description {
   text-transform: capitalize;
