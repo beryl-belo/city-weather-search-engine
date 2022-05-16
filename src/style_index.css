@@ -42,6 +42,9 @@ div {
   font-size: 16px;
 }
 
+.weather-forecast-temperature {
+  font-size: 14px;
+}
 .weather-forecast-temperature-min {
   opacity: 0.5;
 }
