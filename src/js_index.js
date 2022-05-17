@@ -201,7 +201,11 @@ function showCityTempC(response) {
   let currentDateTime = document.querySelector("#currentDateTime");
   currentDateTime.innerHTML = formatDate(response.data.dt * 1000);
 
-  displayForecast();
+  // to call function for displaying weather forecast
+  let forecastApiKey = `481cea56c4f2263ad817a4c796f0dc58`;
+  let forecastApiUrl = `https://api.openweathermap.org/data/2.5/onecall?units=metric&lat=${cityLat}&lon=${cityLon}&exclude=current+minutely+hourly+alert&appid=${forecastApiKey}`;
+
+  axios.get(forecastApiUrl).then(displayForecast);
 }
 
 let citySearch = document.querySelector("form");
@@ -257,10 +261,9 @@ celsiusTemp.addEventListener("click", getSearchCityName);
 // to execute weather forecast
 let cityLat;
 let cityLon;
-function displayForecast() {
-  let forecastApiKey = `481cea56c4f2263ad817a4c796f0dc58`;
-  let forecastApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&exclude=current+minutely+hourly+alert&appid=${forecastApiKey}`;
-  console.log(forecastApiUrl);
+
+function displayForecast(coordinates) {
+  console.log(coordinates.data.daily);
   let forecastElement = document.querySelector("#forecast");
   let dayList = ["Tue", "Wed", "Thu", "Fri", "Sat"];
   let forecastHTML = `<div class="row">`;
