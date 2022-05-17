@@ -157,6 +157,8 @@ function showCityImage(image) {
 }
 
 function showCityTempC(response) {
+  cityLat = response.data.coord.lat;
+  cityLon = response.data.coord.lon;
   let currentCity = document.querySelector("#current-city");
   let responseCityName = response.data.name;
   currentCity.innerHTML = responseCityName;
@@ -198,6 +200,8 @@ function showCityTempC(response) {
   // // show current city datetime
   let currentDateTime = document.querySelector("#currentDateTime");
   currentDateTime.innerHTML = formatDate(response.data.dt * 1000);
+
+  displayForecast();
 }
 
 let citySearch = document.querySelector("form");
@@ -249,3 +253,31 @@ fahrenheitTemp.addEventListener("click", fahrenheitConversion);
 let celsiusTemp = document.querySelector("#celsiusUnit");
 let celsiusTempRaw = null;
 celsiusTemp.addEventListener("click", getSearchCityName);
+
+// to execute weather forecast
+let cityLat;
+let cityLon;
+function displayForecast() {
+  let forecastApiKey = `481cea56c4f2263ad817a4c796f0dc58`;
+  let forecastApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&exclude=current+minutely+hourly+alert&appid=${forecastApiKey}`;
+  console.log(forecastApiUrl);
+  let forecastElement = document.querySelector("#forecast");
+  let dayList = ["Tue", "Wed", "Thu", "Fri", "Sat"];
+  let forecastHTML = `<div class="row">`;
+
+  dayList.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+  <div class="col-2">
+    <div class="weather-forecast-date">${day}</div>
+    <img src="http://openweathermap.org/img/wn/10n@2x.png" alt="" width="60" />
+    <div class="weather-forecast-temperature">
+      <span class="weather-forecast-temperature-min">10°</span>
+      <span class="weather-forecast-temperature-max">23°</span>
+    </div>
+  </div>`;
+  });
+  forecastHTML = forecastHTML + ` </div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
