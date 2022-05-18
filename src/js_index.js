@@ -174,11 +174,12 @@ function showCityTempC(response) {
   celsiusTempRaw = Math.round(response.data.main.temp);
   currentTemp.innerHTML = celsiusTempRaw;
   // to disable #fahrenheitUnit conversion css
-  fahrenheitTemp.classList.remove("active");
-  celsiusTemp.classList.add("active");
+  // fahrenheitTemp.classList.remove("active");
+  // celsiusTemp.classList.add("active");
 
   let currentHumidity = document.querySelector("#humidity");
   let responseHumidity = response.data.main.humidity;
+  console.log(responseHumidity);
   currentHumidity.innerHTML = responseHumidity;
 
   let currentWind = document.querySelector("#wind");
@@ -234,29 +235,29 @@ currentLocation.addEventListener("click", checkCurrentLocation);
 
 // temperature conversion (0°C × 9/5) + 32 = 32°F
 
-function fahrenheitConversion(event) {
-  event.preventDefault();
-  let currentTemp = document.querySelector("#currentTempValue");
-  // to disable #celsiusUnit conversion link
-  celsiusTemp.classList.remove("active");
-  fahrenheitTemp.classList.add("active");
-  // currentTemp.innerHTML = 33; // reset value to celsius
+// function fahrenheitConversion(event) {
+//   event.preventDefault();
+//   let currentTemp = document.querySelector("#currentTempValue");
+//   // to disable #celsiusUnit conversion link
+//   celsiusTemp.classList.remove("active");
+//   fahrenheitTemp.classList.add("active");
+//   // currentTemp.innerHTML = 33; // reset value to celsius
 
-  currentTemp.innerHTML = Math.round((celsiusTempRaw * 9) / 5 + 32);
-  document.getElementById("fahrenheitUnit").innerHTML = "°F";
-}
+//   currentTemp.innerHTML = Math.round((celsiusTempRaw * 9) / 5 + 32);
+//   document.getElementById("fahrenheitUnit").innerHTML = "°F";
+// }
 
-let fahrenheitTemp = document.querySelector("#fahrenheitUnit");
-fahrenheitTemp.addEventListener("click", fahrenheitConversion);
+// let fahrenheitTemp = document.querySelector("#fahrenheitUnit");
+// fahrenheitTemp.addEventListener("click", fahrenheitConversion);
 
 // function celsiusConversion(event) {
 //   event.preventDefault();
 //   let currentTemp = document.querySelector("#currentTempValue");
 //   currentTemp.innerHTML = 33; // reset value to celsius
 // }
-let celsiusTemp = document.querySelector("#celsiusUnit");
-let celsiusTempRaw = null;
-celsiusTemp.addEventListener("click", getSearchCityName);
+// let celsiusTemp = document.querySelector("#celsiusUnit");
+// let celsiusTempRaw = null;
+// celsiusTemp.addEventListener("click", getSearchCityName);
 
 // to execute weather forecast
 let cityLat;
