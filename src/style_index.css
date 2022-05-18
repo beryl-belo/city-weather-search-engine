@@ -57,6 +57,11 @@ div {
 #current-city-weather-icon {
   max-width: 30%;
 }
+
+#currentTempComponents {
+  padding-top: 30px;
+}
+
 #description {
   text-transform: capitalize;
 }
