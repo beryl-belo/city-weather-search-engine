@@ -262,24 +262,42 @@ celsiusTemp.addEventListener("click", getSearchCityName);
 let cityLat;
 let cityLon;
 
+function formatForecastDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let dayList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return dayList[day];
+}
+
 function displayForecast(coordinates) {
+  let forecastApiData = coordinates.data.daily;
   console.log(coordinates.data.daily);
   let forecastElement = document.querySelector("#forecast");
-  let dayList = ["Tue", "Wed", "Thu", "Fri", "Sat"];
   let forecastHTML = `<div class="row">`;
 
-  dayList.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  forecastApiData.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
   <div class="col-2">
-    <div class="weather-forecast-date">${day}</div>
-    <img src="http://openweathermap.org/img/wn/10n@2x.png" alt="" width="60" />
+    <div class="weather-forecast-date">${formatForecastDay(
+      forecastDay.dt
+    )}</div>
+ 
+    <img src="http://openweathermap.org/img/wn/${
+      forecastDay.weather[0].icon
+    }.png" alt="" width="60" />
     <div class="weather-forecast-temperature">
-      <span class="weather-forecast-temperature-min">10°</span>
-      <span class="weather-forecast-temperature-max">23°</span>
+      <span class="weather-forecast-temperature-min">${Math.round(
+        forecastDay.temp.min
+      )}°</span>
+      <span class="weather-forecast-temperature-max">${Math.round(
+        forecastDay.temp.max
+      )}°</span>
     </div>
   </div>`;
+    }
   });
   forecastHTML = forecastHTML + ` </div>`;
   forecastElement.innerHTML = forecastHTML;
